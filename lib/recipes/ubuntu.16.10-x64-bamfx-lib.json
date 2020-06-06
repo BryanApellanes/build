@@ -6,7 +6,8 @@
     "/media/data/src/Bam.Net.Core/_lib/bam.net.core/bam.net.core.csproj",
     "/media/data/src/Bam.Net.Core/_lib/bam.net.presentation/bam.net.presentation.csproj",
     "/media/data/src/Bam.Net.Core/_lib/adhoc/adhoc.csproj",
-    "/media/data/src/Bam.Net.Core/_lib/bam.net.schema.org/bam.net.schema.org.csproj"
+    "/media/data/src/Bam.Net.Core/_lib/bam.net.data.dynamic/bam.net.data.dynamic.csproj",
+    "/media/data/src/Bam.Net.Core/_lib/bam.net.data.graphql/bam.net.data.graphql.csproj"
   ],
   "OutputDirectory": "/tmp/bam/lib",
   "NugetOutputDirectory": "/home/bryan/.bam/nupkg/Linux",

@@ -3,6 +3,7 @@
 source ../common/init.sh
 
 ensure_bake
+ensure_bamtest
 set_git_commit
 
 

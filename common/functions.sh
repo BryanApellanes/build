@@ -49,7 +49,7 @@ function ensure_bamtest(){
 function build_bamtest(){
     rm -fr ~/.bam/tmp/build_bamtest
     dotnet publish ${BAMSRCROOT}/_tools/bamtest/bamtest.csproj -c Release -r ${RUNTIME} -o ~/.bam/tmp/bamtest
-    
+    zip -r ${TESTBIN}/../bamtest.zip ~/.bam/tmp/bamtest 
     export BAMTEST=~/.bam/tmp/bamtest/bamtest
 }
 

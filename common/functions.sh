@@ -27,30 +27,24 @@ function initialize_defaults() {
     fi
 }
 
-function ensure_bake(){
-    if [[ -z ${BAKE} || !(-f ${BAKE}) ]]; then
-        build_bake    
-    fi
+function build_tool(){
+    TOOLNAME=$1
+    TOOLVARIABLE=${1^^}
+    rm -fr ~/.bam/tmp/${TOOLNAME}
+    dotnet publish ${BAMSRCROOT}/_tools/${TOOLNAME}/${TOOLNAME}.csproj -c Release -r ${RUNTIME} -o ${BAMTOOLKITHOME}/${TOOLNAME}
+    export $TOOLVARIABLE=${BAMTOOLKITHOME}/${TOOLNAME}/${TOOLNAME}    
 }
 
-function build_bake(){
-    rm -fr ~/.bam/tmp/bake
-    dotnet publish ${BAMSRCROOT}/_tools/bake/bake.csproj -c Release -r ${RUNTIME} -o ~/.bam/tmp/bake
-
-    export BAKE=~/.bam/tmp/bake/bake
+function ensure_bake(){
+    if [[ -z ${BAKE} || !(-f ${BAKE}) ]]; then
+        build_tool bake    
+    fi
 }
 
 function ensure_bamtest(){
     if [[ -z ${BAMTEST} || !(-f ${BAMTEST}) ]]; then
-        build_bamtest
+        build_tool bamtest
     fi
-}
-
-function build_bamtest(){
-    rm -fr ~/.bam/tmp/build_bamtest
-    dotnet publish ${BAMSRCROOT}/_tools/bamtest/bamtest.csproj -c Release -r ${RUNTIME} -o ~/.bam/tmp/bamtest
-    zip -r ${TESTBIN}/../bamtest.zip ~/.bam/tmp/bamtest 
-    export BAMTEST=~/.bam/tmp/bamtest/bamtest
 }
 
 function expand_tildes(){    

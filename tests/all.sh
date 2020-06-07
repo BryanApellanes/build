@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-./configure.sh
+source ./configure.sh
 ./clean.sh
 ./build.sh
 

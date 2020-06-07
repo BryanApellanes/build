@@ -14,4 +14,6 @@ ${BAKE} /zip:${RUNTIME}-bamtoolkit-${GITCOMMIT}-tests.zip /zipRecipe:${OUTPUTREC
 if [[ -f ${TESTBIN}/../bamtoolkit-tests.zip ]]; then
     rm ${TESTBIN}/../bamtoolkit-tests.zip
 fi
-mv ${TESTBIN}/../${RUNTIME}-bamtoolkit-${GITCOMMIT}-tests.zip ${TESTBIN}/../bamtoolkit-tests.zip
+mv ${TESTBIN}/../${RUNTIME}-bamtoolkit-${GITCOMMIT}-tests.zip ${BAMARTIFACTS}/bamtoolkit-tests.zip
+rm -fr ${BAMARTIFACTS}/bamtest/
+cp -R ${BAMTOOLKITHOME}/bamtest/ ${BAMARTIFACTS}/bamtest/

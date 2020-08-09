@@ -14,5 +14,5 @@ if [[ -f ${OUTPUTBIN}/../bamtoolkit.zip ]]; then
     rm ${OUTPUTBIN}/../bamtoolkit.zip
 fi
 echo "mv ${OUTPUTBIN}/../${RUNTIME}-bamtoolkit-${GITCOMMIT}.zip ${OUTPUTBIN}/../bamtoolkit.zip"
-mv ${OUTPUTBIN}/../${RUNTIME}-bamtoolkit-${GITCOMMIT}.zip ${BAMARTIFACTS}/${RUNTIME}-bamtoolkit-${GITCOMMIT}.zip
+mv ${OUTPUTBIN}/../${RUNTIME}-bamtoolkit-${GITCOMMIT}.zip ${BAMARTIFACTS}/bamtoolkit-${GITCOMMIT}.zip
 cp ${BAMARTIFACTS}/${RUNTIME}-bamtoolkit-${GITCOMMIT}.zip ${OUTPUTBIN}/../bamtoolkit.zip

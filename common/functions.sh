@@ -81,9 +81,11 @@ function add_symlinks_to_path(){
 }
 
 function set_git_commit(){
+    cd ${BAMSRCROOT}
     if [[ -z ${GITCOMMIT} ]]; then
-        printf "Setting GITCOMMIT\r\n"
+        printf "Setting GITCOMMIT from `pwd`\r\n"
         export GITCOMMIT=`git rev-parse --short HEAD`
     fi
     printf "GITCOMMIT = ${GITCOMMIT}\r\n"
+    cd -
 }

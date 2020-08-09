@@ -77,6 +77,7 @@ function add_symlinks_to_path(){
         [[ ":$PATH:" != *":${BAMTOOLKITSYMLINKS}:"* ]] && export PATH="${BAMTOOLKITSYMLINKS}:${PATH}"
     fi
     printf "PATH = ${PATH}\r\n\r\n"
+    export PATH=${PATH}
 }
 
 function set_git_commit(){

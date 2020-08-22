@@ -10,4 +10,3 @@ rm -fr ${OUTPUTBIN}
 ${BAKE} /recipe:./recipes/${RUNTIME}-bamtoolkit.json
 
 ./commands/zip.sh
-./commands/install.sh

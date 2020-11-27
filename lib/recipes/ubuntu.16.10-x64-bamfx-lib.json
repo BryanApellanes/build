@@ -4,10 +4,10 @@
   "ProjectFilePaths": [
     "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.net.aws/bam.net.aws.csproj",
     "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.net.core/bam.net.core.csproj",
+    "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.remote/bam.remote.csproj",
     "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.net.presentation/bam.net.presentation.csproj",
     "/media/data/src/BamFrameworkCore/Bam.Net/_lib/adhoc/adhoc.csproj",
-    "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.net.data.dynamic/bam.net.data.dynamic.csproj",
-    "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.net.data.graphql/bam.net.data.graphql.csproj"
+    "/media/data/src/BamFrameworkCore/Bam.Net/_lib/bam.net.data.dynamic/bam.net.data.dynamic.csproj"
   ],
   "OutputDirectory": "/tmp/bam/lib",
   "NugetOutputDirectory": "/home/bryan/.bam/nupkg/Linux",

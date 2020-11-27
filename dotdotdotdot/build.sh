@@ -23,7 +23,9 @@ function configureCleanBuild(){
 }
 
 function build(){
-    if [[ -d "./.bam/build" ]]; then
+    if [[ -f "./build.sh" ]]; then
+        ./build.sh
+    elif [[ -d "./.bam/build" ]]; then
         pushd .bam/build
         build
         popd

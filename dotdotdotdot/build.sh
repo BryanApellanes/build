@@ -22,10 +22,18 @@ function configureCleanBuild(){
     fi
 }
 
+function foreachSubmodule(){
+    COMMAND=$1
+    SUBMODULES=($(git submodule | awk '{print $2}'))
+    for SUBMODULE in "${SUBMODULES[@]}"; do
+        pushd $SUBMODULE > /dev/null
+        echo `pwd`
+        popd > /dev/null
+    done
+}
+
 function build(){
-    if [[ -f "./build.sh" ]]; then
-        ./build.sh
-    elif [[ -d "./.bam/build" ]]; then
+    if [[ -d "./.bam/build" ]]; then
         pushd .bam/build
         build
         popd

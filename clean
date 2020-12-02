@@ -17,5 +17,5 @@ fi
 COMMAND="clean"
 
 cd ./common
-./exec.sh ${CONTEXT} $COMMAND
+./exec.sh ${CONTEXT} ${COMMAND}
 cd ..

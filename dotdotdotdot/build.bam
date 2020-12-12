@@ -28,6 +28,7 @@ function foreachSubmodule(){
     for SUBMODULE in "${SUBMODULES[@]}"; do
         pushd $SUBMODULE > /dev/null
         echo `pwd`
+        $1
         popd > /dev/null
     done
 }

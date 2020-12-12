@@ -1,3 +1,5 @@
 #!/bin/bash
 
-cp ./dotdotdotdot/build.sh ../../
+pushd ../../
+.bam/build/symlink build.bam `pwd`/.bam/build/dotdotdotdot/build.bam
+popd

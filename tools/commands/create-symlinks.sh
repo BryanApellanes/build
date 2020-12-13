@@ -28,9 +28,11 @@ do
         printf "Removing existing link ${BAMTOOLKITSYMLINKS}/${TOOLNAME}"
         rm ${BAMTOOLKITSYMLINKS}/${TOOLNAME}
     fi
-    printf "Adding symlink ${BAMTOOLKITSYMLINKS}/${TOOLNAME} => ${BAMTOOLKITBIN}/${TOOLNAME}/${TOOLNAME}\r\n"  
-    echo "ln -s ${BAMTOOLKITBIN}/${TOOLNAME}/${TOOLNAME} ${BAMTOOLKITSYMLINKS}/${TOOLNAME}"
-    ln -s ${BAMTOOLKITBIN}/${TOOLNAME}/${TOOLNAME} ${BAMTOOLKITSYMLINKS}/${TOOLNAME}    
+    DEST=${BAMTOOLKITBIN}/${TOOLNAME}/${TOOLNAME}
+    LINK=${BAMTOOLKITSYMLINKS}/${TOOLNAME}
+    printf "Adding symlink ${LINK} => ${DEST}\r\n"  
+    echo "../../symlink ${LINK} ${DEST}"
+    ../../symlink ${LINK} ${DEST}
     printf "\r\n"
 done
 cd $curdir

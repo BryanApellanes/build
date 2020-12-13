@@ -1,5 +1,26 @@
 #!/bin/bash
 
-pushd ../../
-.bam/build/symlink build.bam `pwd`/.bam/build/dotdotdotdot/build.bam
-popd
+if [[ $_ != $0 ]]; then # && echo "Script is being sourced" || echo "Script is a subshell"
+    pushd ./common
+    source init.sh
+    popd
+
+    pushd ../../
+    .bam/build/symlink build.bam `pwd`/.bam/build/dotdotdotdot/build.bam
+    .bam/build/symlink symlink `pwd`/.bam/build/symlink
+    popd
+
+    pushd ./lib
+    ../symlink common `pwd`/../common
+    popd
+
+    pushd ./tools
+    ../symlink common `pwd`/../common
+    popd
+
+    pushd ./tests
+    ../symlink common `pwd`/../common
+    popd
+else
+    printf "please source this script: 'source $0'";
+fi

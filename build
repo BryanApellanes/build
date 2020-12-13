@@ -16,6 +16,6 @@ fi
 
 COMMAND="build"
 
-cd ./common
-./exec.sh ${CONTEXT} $COMMAND
-cd ..
+pushd ./common
+./exec.sh ${CONTEXT} ${COMMAND}
+popd

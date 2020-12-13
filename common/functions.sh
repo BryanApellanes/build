@@ -21,9 +21,9 @@ NC='\033[0m'
 
 function initialize_defaults() {
     if [[ -d ./env ]]; then
-        cd ./env
+        pushd ./env
         source defaults.sh
-        cd ..
+        popd
     fi
 }
 
@@ -31,8 +31,13 @@ function build_tool(){
     TOOLNAME=$1
     TOOLVARIABLE=${1^^}
     rm -fr ~/.bam/tmp/${TOOLNAME}
-    dotnet publish ${BAMSRCROOT}/_tools/${TOOLNAME}/${TOOLNAME}.csproj -c Release -r ${RUNTIME} -o ${BAMTOOLKITHOME}/${TOOLNAME}
+    dotnet publish ${BAMSRCROOT}/_tools/${TOOLNAME}/${TOOLNAME}.csproj -c Debug -r ${RUNTIME} -o ${BAMTOOLKITHOME}/${TOOLNAME}
     export $TOOLVARIABLE=${BAMTOOLKITHOME}/${TOOLNAME}/${TOOLNAME}    
+}
+
+function rebuild_bake(){
+    rm `echo $BAKE`    
+    ensure_bake
 }
 
 function ensure_bake(){

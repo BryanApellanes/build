@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cd defaults
+pushd defaults
+
 printf "**** DEFAULTS ****\r\n"
 for FILE in ./* 
 do
@@ -10,6 +11,15 @@ do
 done
 printf "**** / DEFAULTS ****\r\n"
 
-cd ..
+if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
+    echo "setting BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}"
+    export BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}
+    echo "setting BAMARTIFACTS=${BAMARTIFACTSWINDOWS}"
+    export BAMARTIFACTS=${BAMARTIFACTSWINDOWS}
+    echo "setting OUTPUTBIN=${OUTPUTBINWINDOWS}"
+    export OUTPUTBIN=${OUTPUTBINWINDOWS}
+fi
+
+popd
 
 source ./runtime.sh

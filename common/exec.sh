@@ -33,6 +33,6 @@ if [[ !(-f ../${CONTEXT}/${COMMAND}.sh) ]]; then
 fi
 
 printf "executing => ${CONTEXT}/${COMMAND}.sh $3 $4 $5 $6\r\n"
-cd ../${CONTEXT}
+pushd ../${CONTEXT}
 ./${COMMAND}.sh $3 $4 $5 $6
-cd ..
+popd

@@ -6,8 +6,8 @@ if [[ $_ != $0 ]]; then # && echo "Script is being sourced" || echo "Script is a
     popd
 
     pushd ../../
-    .bam/build/symlink build.bam `pwd`/.bam/build/dotdotdotdot/build.bam
-    .bam/build/symlink symlink `pwd`/.bam/build/symlink
+    cp ./.bam/build/dotdotdotdot/build.bam ./build.bam
+    cp ./.bam/build/symlink ./symlink
     popd
 
     pushd ./lib

@@ -18,6 +18,10 @@ if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
     export BAMARTIFACTS=${BAMARTIFACTSWINDOWS}
     echo "setting OUTPUTBIN=${OUTPUTBINWINDOWS}"
     export OUTPUTBIN=${OUTPUTBINWINDOWS}
+    echo "setting OUTPUTLIB=${OUTPUTLIBWINDOWS}"
+    export OUTPUTLIB=${OUTPUTLIBWINDOWS}
+    echo "setting TESTBIN=${TESTBINWINDOWS}"
+    export TESTBIN=${TESTBINWINDOWS}
 fi
 
 popd

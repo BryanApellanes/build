@@ -16,6 +16,6 @@ fi
 
 COMMAND="build"
 
-pushd ./common
+pushd ./common > /dev/null
 ./exec.sh ${CONTEXT} ${COMMAND}
-popd
+popd > /dev/null

@@ -16,6 +16,6 @@ fi
 
 COMMAND="clean"
 
-cd ./common
+pushd ./common > /dev/null
 ./exec.sh ${CONTEXT} ${COMMAND}
-cd ..
+popd > /dev/null

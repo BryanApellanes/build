@@ -85,6 +85,15 @@ function add_symlinks_to_path(){
     export PATH=${PATH}
 }
 
+function clean_artifacts(){
+    if [[ -d ${BAMARTIFACTS} ]]; then
+        printf "cleaning artifacts: ${BAMARTIFACTS}"
+        pushd ${BAMARTIFACTS}
+        rm * -fr
+        popd
+    fi
+}
+
 function set_git_commit(){
     cd ${BAMSRCROOT}
     if [[ -z ${GITCOMMIT} ]]; then

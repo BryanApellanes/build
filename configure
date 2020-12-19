@@ -8,6 +8,6 @@ fi
 
 COMMAND="configure"
 
-cd ./common
+pushd ./common > /dev/null
 ./exec.sh ${CONTEXT} $COMMAND
-cd ..
+popd > /dev/null

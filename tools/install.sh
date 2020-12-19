@@ -1,6 +1,7 @@
 #!/bin/bash
 
-pushd ./common
+pushd ../common > /dev/null
 source ./init.sh
-popd
+popd > /dev/null
+
 ./commands/install.sh

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ../common/init.sh
+pushd ../common > /dev/null
+source ./init.sh
+popd > /dev/null
 
 ensure_bake
 

@@ -6,20 +6,8 @@ if [[ $_ != $0 ]]; then # && echo "Script is being sourced" || echo "Script is a
     popd
 
     pushd ../../
-    cp ./.bam/build/dotdotdotdot/build.bam ./build.bam
+    cp ./.bam/build/dotdotdotdot/build.sh ./build.sh
     cp ./.bam/build/symlink ./symlink
-    popd
-
-    pushd ./lib
-    ../symlink common `pwd`/../common
-    popd
-
-    pushd ./tools
-    ../symlink common `pwd`/../common
-    popd
-
-    pushd ./tests
-    ../symlink common `pwd`/../common
     popd
 else
     printf "please source this script: 'source $0'";

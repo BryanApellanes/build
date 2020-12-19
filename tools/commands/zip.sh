@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd ./common > /dev/null
+pushd ../common > /dev/null
 source ./init.sh
 popd > /dev/null
 

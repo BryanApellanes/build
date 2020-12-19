@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd ./common
+pushd ../common
 source ./init.sh
 popd
 

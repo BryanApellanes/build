@@ -1,10 +1,10 @@
 #!/bin/bash
 
-pushd ./common
+pushd ../common > /dev/null
 source ./init.sh
-popd
+popd > /dev/null
 
 ensure_bake
 
-printf "$BAKE /discover:${BAMSRCROOT}/_tools/ /outputDirectory:${OUTPUTBIN} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamtoolkit.json\r\n"
-$BAKE /discover:${BAMSRCROOT}/_tools/ /outputDirectory:${OUTPUTBIN} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamtoolkit.json
+printf "$BAKE /discover:${BAMSRCROOT}/_tools/ /recipeOutputDirectory:${OUTPUTBIN} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamtoolkit.json\r\n"
+$BAKE /discover:${BAMSRCROOT}/_tools/ /recipeOutputDirectory:${OUTPUTBIN} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamtoolkit.json

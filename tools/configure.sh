@@ -1,8 +1,8 @@
 #!/bin/bash
 
-pushd ./common
+pushd ../common > /dev/null
 source ./init.sh
-popd
+popd > /dev/null
 
 ensure_bake
 
@@ -10,4 +10,5 @@ echo "BAMLIFECYLE = ${BAMLIFECYCLE}"
 
 ./commands/discover.sh
 
-$BAKE /version:Patch /versionRecipe:./recipes/${RUNTIME}-bamtoolkit.json
+echo "$BAKE /version:Patch /${BAMLIFECYCLE}:1 /versionRecipe:./recipes/${RUNTIME}-bamtoolkit.json"
+$BAKE /version:Patch /${BAMLIFECYCLE}:1 /versionRecipe:./recipes/${RUNTIME}-bamtoolkit.json

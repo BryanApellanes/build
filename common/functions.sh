@@ -105,6 +105,15 @@ function set_git_commit(){
 }
 
 function push_nugets(){
+    if [[ -z ${GITHUB_USERNAME} ]]; then
+        echo "push_nugets: GITHUB_USERNAME variable not set"
+        return
+    fi
+    if [[ -z ${GITHUB_ACCESS_TOKEN} ]]; then
+        echo "push_nugets: GITHUB_ACCESS_TOKEN variable not set"
+        return
+    fi
+    echo "preparing to push nuget packages"
     GITHUB_PACKAGE_SOURCE="https://nuget.pkg.github.com/okta/index.json"
     echo "adding github package source: ${GITHUB_PACKAGE_SOURCE}"
     dotnet nuget add source ${GITHUB_PACKAGE_SOURCE} -n github -u ${GITHUB_USERNAME} -p ${GITHUB_ACCESS_TOKEN} --store-password-in-clear-text

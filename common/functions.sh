@@ -103,3 +103,20 @@ function set_git_commit(){
     printf "GITCOMMIT = ${GITCOMMIT}\r\n"
     cd -
 }
+
+function push_nugets(){
+    GITHUB_PACKAGE_SOURCE="https://nuget.pkg.github.com/okta/index.json"
+    echo "adding github package source: ${GITHUB_PACKAGE_SOURCE}"
+    dotnet nuget add source ${GITHUB_PACKAGE_SOURCE} -n github -u ${GITHUB_USERNAME} -p ${GITHUB_ACCESS_TOKEN} --store-password-in-clear-text
+    echo "setting nuget source to github"
+    NUGET_SOURCE="github"
+    NUGET_API_KEY=${GITHUB_ACCESS_TOKEN}   
+    pushd ${BAMARTIFACTS}/nugetPackages > /dev/null
+    for NUGETPACKAGE in $(ls ./*.nupkg)
+    do
+        echo "Pushing nuget package ${NUGETPACKAGE} to ${NUGET_SOURCE}"
+        echo "dotnet nuget push ${NUGETPACKAGE} -k ${NUGET_API_KEY} -s ${NUGET_SOURCE}"
+        dotnet nuget push ${NUGETPACKAGE} -k ${NUGET_API_KEY} -s ${NUGET_SOURCE}
+    done
+    popd > /dev/null
+}

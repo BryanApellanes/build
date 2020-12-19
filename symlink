@@ -6,7 +6,7 @@ function symlink(){
     echo ""${OSTYPE}": Creating link ${LINK} => ${DEST}"
     if [[ "${OSTYPE}" == "linux-gnu" || "${OSTYPE}" == "freebsd"* || "${OSTYPE}" == "darwin"* ]]; then
         echo "using ln"
-        ln -s ${DEST} ${LINK}
+        sudo ln -s ${DEST} ${LINK}
     fi
     if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
         MKLINKDEST="${2////\\}"

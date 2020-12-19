@@ -6,9 +6,7 @@
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.aws\\bam.net.aws.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.core\\bam.net.core.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.data.dynamic\\bam.net.data.dynamic.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.oidc\\bam.net.oidc.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.presentation\\bam.net.presentation.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.remote\\bam.remote.csproj"
+    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.presentation\\bam.net.presentation.csproj"
   ],
   "OutputDirectory": "c:/tmp/bam/lib",
   "NugetOutputDirectory": "C:\\Users\\bryan.apellanes.G19H2Z2\\.bam\\nupkg\\Windows",

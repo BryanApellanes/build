@@ -1,14 +1,18 @@
 #!/bin/bash
 
-pushd ../common
+pushd ../common > /dev/null
 source ./init.sh
-popd
+popd > /dev/null
 
 ensure_bake
 
 printf "deleting ${OUTPUTBIN}\r\n"
 rm -fr ${OUTPUTBIN}
 
-${BAKE} /recipe:./recipes/${RUNTIME}-bamtoolkit.json /output:${OUTPUTBIN} #/debug:true
+echo "BAKING recipe ./recipes/${RUNTIME}-bamtoolkit.json into ${OUTPUTBIN}"
+${BAKE} /recipe:./recipes/${RUNTIME}-bamtoolkit.json /output:${OUTPUTBIN}
+
+echo "BAKING nugets ./recipes/${RUNTIME}-bamtoolkit.json into ${BAMARTIFACTS}/nugetPackages"
+${BAKE} /nuget:./recipes/${RUNTIME}-bamtoolkit.json /nugetOutput:${BAMARTIFACTS}/nugetPackages
 
 ./commands/zip.sh

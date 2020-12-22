@@ -2,14 +2,14 @@
 
 pushd defaults
 
-printf "**** DEFAULTS ****\r\n"
+printf "**** ENVIRONMENT VARIABLES ****\r\n"
 for FILE in ./* 
 do
-    CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`    
+    CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
     export $CURRENTVARIABLE=$(<./${FILE})    
     echo "${CURRENTVARIABLE}=$(<./${FILE})"
 done
-printf "**** / DEFAULTS ****\r\n"
+printf "**** / ENVIRONMENT VARIABLES ****\r\n"
 
 if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
     echo "setting BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}"

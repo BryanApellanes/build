@@ -56,6 +56,13 @@ function build_tool(){
     export $TOOLVARIABLE=${BAMTOOLKITHOME}/${TOOLNAME}/${TOOLNAME}    
 }
 
+function rebuild_tool(){
+    TOOLNAME=$1
+    TOOLVARIABLE=${1^^}
+    rm ${BAMTOOLKITHOME}/${TOOLNAME}/${TOOLNAME}
+    build_tool ${TOOLNAME}
+}
+
 function rebuild_bake(){
     rm `echo $BAKE`    
     ensure_bake
@@ -63,7 +70,12 @@ function rebuild_bake(){
 
 function ensure_bake(){
     if [[ -z ${BAKE} || !(-f ${BAKE}) ]]; then
-        build_tool bake    
+        if [[ -f ${BAMSRCROOT}/_tools/${TOOLNAME}/${TOOLNAME}.csproj ]]; then
+            build_tool bake
+        else
+            build_tool bam
+            $BAM /install:bake
+        fi
     fi
 }
 

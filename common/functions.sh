@@ -52,7 +52,6 @@ function initialize_overrides() {
 function build_tool(){
     TOOLNAME=$1
     TOOLVARIABLE=${1^^}
-    rm -fr ~/.bam/tmp/${TOOLNAME}
     dotnet publish ${BAMSRCROOT}/_tools/${TOOLNAME}/${TOOLNAME}.csproj -c Debug -r ${RUNTIME} -o ${BAMTOOLKITHOME}/${TOOLNAME}
     export $TOOLVARIABLE=${BAMTOOLKITHOME}/${TOOLNAME}/${TOOLNAME}    
 }

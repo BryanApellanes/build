@@ -22,7 +22,7 @@
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tests\\core\\bam.net.translation.core.tests\\bam.net.translation.core.tests.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tests\\core\\bam.net.useraccounts.core.tests\\bam.net.useraccounts.core.tests.csproj"
   ],
-  "OutputDirectory": "c:/tmp/bam/tests/bin",
+  "OutputDirectory": "c:/opt/bam/tests/bin",
   "NugetOutputDirectory": "C:\\Users\\bryan.apellanes.G19H2Z2\\.bam\\nupkg\\Windows",
   "BuildConfig": "Debug",
   "OsName": "Windows"

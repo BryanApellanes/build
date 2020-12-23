@@ -16,6 +16,8 @@ if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
     export BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}
     echo "setting BAMARTIFACTS=${BAMARTIFACTSWINDOWS}"
     export BAMARTIFACTS=${BAMARTIFACTSWINDOWS}
+    echo "setting DIST=${DISTWINDOWS}"
+    export DIST=${DISTWINDOWS}
     echo "setting OUTPUTBIN=${OUTPUTBINWINDOWS}"
     export OUTPUTBIN=${OUTPUTBINWINDOWS}
     echo "setting OUTPUTLIB=${OUTPUTLIBWINDOWS}"

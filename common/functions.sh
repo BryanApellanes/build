@@ -21,9 +21,31 @@ NC='\033[0m'
 
 function initialize_defaults() {
     if [[ -d ./env ]]; then
-        pushd ./env
+        pushd ./env > /dev/null
         source defaults.sh
-        popd
+        popd > /dev/null
+    fi
+}
+
+function read_var_dir() {
+    VARDIR=$1
+    if [[ -d ${VARDIR} ]]; then
+        pushd ${VARDIR} > /dev/null
+        printf "**** ENVIRONMENT VARIABLES FROM VARDIR '${VARDIR}' ****\r\n"
+        for FILE in ./* 
+        do
+            CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
+            export $CURRENTVARIABLE=$(<./${FILE})    
+            echo "${CURRENTVARIABLE}=$(<./${FILE})"
+        done
+        printf "**** / ENVIRONMENT VARIABLES FROM VARDIR '${VARDIR}' ****\r\n"        
+        popd > /dev/null
+    fi
+}
+
+function initialize_overrides() {
+    if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
+        read_var_dir ${BAMOVERRIDES}
     fi
 }
 

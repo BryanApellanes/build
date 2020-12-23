@@ -3,7 +3,6 @@
   "ProjectRoot": "../../.././_tools/",
   "ProjectFilePaths": [
     "C:\\src\\repos\\BamFrameworkCore\\BamAppServices\\_tools\\badns\\badns.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\BamAppServices\\_tools\\bake\\bake.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\BamAppServices\\_tools\\bam\\bam.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\BamAppServices\\_tools\\bam.control\\bam.control.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\BamAppServices\\_tools\\bambot\\bambot.csproj",

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#echo colors
+#BOLD=$(tput bold)
+#BLACK=$(tput setaf 0)
+#WHITE=$(tput setaf 7)
+#BLUE=$(tput setaf 4)
+#GREEN=$(tput setaf 2)
+#NORMAL=$(tput sgr0)
+
+# printf colors
 BLACK='\033[0;30m'
 DARKRED='\033[0;31m'
 DARKGREEN='\033[0;32m'
@@ -19,33 +28,90 @@ WHITE='\033[1;37m'
 NOCOLOR='\033[0m'
 NC='\033[0m'
 
+function print(){
+    MSG=$1
+    COLOR=$2
+    if [[ -z ${COLOR} ]]; then 
+        COLOR=${NOCOLOR}
+    fi
+    printf "${COLOR}${MSG}${NC}"
+}
+
+function print_line(){
+    print "$1" "$2"
+    printf "\r\n"
+}
+
+function export_windows_overrides(){    
+    if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
+        print_line "*** WINDOWS OVERRIDES ***" ${BLUE}
+        print_line "setting BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}" ${BLUE}
+        export BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}
+        print_line "setting BAMARTIFACTS=${BAMARTIFACTSWINDOWS}" ${BLUE}
+        export BAMARTIFACTS=${BAMARTIFACTSWINDOWS}
+        print_line "setting DIST=${DISTWINDOWS}" ${BLUE}
+        export DIST=${DISTWINDOWS}
+        print_line "setting OUTPUTBIN=${OUTPUTBINWINDOWS}" ${BLUE}
+        export OUTPUTBIN=${OUTPUTBINWINDOWS}
+        print_line "setting OUTPUTLIB=${OUTPUTLIBWINDOWS}" ${BLUE}
+        export OUTPUTLIB=${OUTPUTLIBWINDOWS}
+        print_line "setting TESTBIN=${TESTBINWINDOWS}" ${BLUE}
+        export TESTBIN=${TESTBINWINDOWS}
+        print_line "*** / WINDOWS OVERRIDES ***" ${BLUE}
+    fi
+}
+
+function export_var_dir(){
+    DIRECTORY=$1
+
+    pushd $DIRECTORY > /dev/null
+    print_line "**** ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
+    for FILE in ./* 
+    do
+        CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
+        export $CURRENTVARIABLE=$(<./${FILE})    
+        print_line "${CURRENTVARIABLE}=$(<./${FILE})" ${DARKCYAN}
+    done
+    print_line "**** / ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
+    popd > /dev/null
+}
+
+function set_runtime(){
+    if [[ -z "${RUNTIME}" ]]; then 
+        if [[ "${OSTYPE}" == "linux-gnu" ]]
+            then RUNTIME=ubuntu.16.10-x64
+        fi
+        if [[ "${OSTYPE}" == "darwin"* ]]
+            then RUNTIME=osx-x64
+        fi
+        if [[ "${OSTYPE}" == "cygwin" ]]
+            then RUNTIME=win10-x64
+        fi
+        if [[ "${OSTYPE}" == "msys" ]]
+            then RUNTIME=win10-x64
+        fi
+        if [[ "${OSTYPE}" == "freebsd"* ]]
+            then RUNTIME=osx-x64
+        fi
+
+        export RUNTIME
+        print_line "'RUNTIME is' ${RUNTIME}" ${DARKYELLOW}
+    fi
+}
+
 function initialize_defaults() {
-    if [[ -d ./env ]]; then
-        pushd ./env > /dev/null
-        source defaults.sh
-        popd > /dev/null
+    if [[ -d ./env/defaults ]]; then
+        export_var_dir ./env/defaults
     fi
+    print_line ""
+    export_windows_overrides
+    print_line ""
+    set_runtime
 }
 
-function read_var_dir() {
-    VARDIR=$1
-    if [[ -d ${VARDIR} ]]; then
-        pushd ${VARDIR} > /dev/null
-        printf "**** ENVIRONMENT VARIABLES FROM VARDIR '${VARDIR}' ****\r\n"
-        for FILE in ./* 
-        do
-            CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
-            export $CURRENTVARIABLE=$(<./${FILE})    
-            echo "${CURRENTVARIABLE}=$(<./${FILE})"
-        done
-        printf "**** / ENVIRONMENT VARIABLES FROM VARDIR '${VARDIR}' ****\r\n"        
-        popd > /dev/null
-    fi
-}
-
-function initialize_overrides() {
+function export_bam_overrides() {
     if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
-        read_var_dir ${BAMOVERRIDES}
+        export_var_dir ${BAMOVERRIDES}
     fi
 }
 

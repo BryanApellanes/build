@@ -4,7 +4,9 @@ if [[ $_ != $0 ]]; then # && echo "Script is being sourced" || echo "Script is a
     pushd ./common
     source init.sh
     popd
-
+    
+    export BAMSRCROOT=`pwd`
+    
     pushd ../../
     cp ./.bam/build/dotdotdotdot/build.sh ./build.sh
     cp ./.bam/build/symlink ./symlink

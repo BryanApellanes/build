@@ -110,8 +110,13 @@ function initialize_defaults() {
 }
 
 function export_bam_overrides() {
+    print_line "BAMOVERRIDES $BAMOVERRIDES" $YELLOW
     if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
+        print_line "EXPORTING BAMOVERRIDES ${BAMOVERRIDES}" ${DARKYELLOW}
         export_var_dir ${BAMOVERRIDES}
+    else
+        print_line "CURRENT DIRECTORY is `pwd`"
+        print_line "BAMOVERRIDES is "$BAMOVERRIDES""
     fi
 }
 
@@ -124,7 +129,6 @@ function build_tool(){
 
 function rebuild_tool(){
     TOOLNAME=$1
-    TOOLVARIABLE=${1^^}
     rm ${BAMTOOLKITHOME}/${TOOLNAME}/${TOOLNAME}
     build_tool ${TOOLNAME}
 }
@@ -136,11 +140,15 @@ function rebuild_bake(){
 
 function ensure_bake(){
     if [[ -z ${BAKE} || !(-f ${BAKE}) ]]; then
-        if [[ -f ${BAMSRCROOT}/_tools/${TOOLNAME}/${TOOLNAME}.csproj ]]; then
+        if [[ -f ${BAMSRCROOT}/_tools/bake/bake.csproj ]]; then
             build_tool bake
-        else
+        elif [[ -z ${BAM} || !(-f ${BAM}) ]]; then
+            $BAM /install:bake
+        elif [[ -f ${BAMSRCROOT}/_tools/bam/bam.csproj ]]; then
             build_tool bam
             $BAM /install:bake
+        else
+            print_line "UNABLE TO INSTALL BUILD TOOLS" $RED
         fi
     fi
 }
@@ -154,8 +162,9 @@ function ensure_bamtest(){
 function expand_tildes(){    
     export BAMTOOLKITBIN="${BAMTOOLKITBIN/#\~/$HOME}"
     export BAMTOOLKITSYMLINKS="${BAMTOOLKITSYMLINKS/#\~/$HOME}"
-    echo "BAMTOOLKITBIN = ${BAMTOOLKITBIN}"
-    echo "BAMTOOLKITSYMLINKS = ${BAMTOOLKITSYMLINKS}"
+    print_line "BAMTOOLKITBIN = ${BAMTOOLKITBIN}" $DARKBLUE
+    print_line "BAMTOOLKITSYMLINKS = ${BAMTOOLKITSYMLINKS}" $DARKBLUE
+    print_line ""
 }
 
 function add_to_path(){

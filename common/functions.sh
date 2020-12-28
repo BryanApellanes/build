@@ -243,3 +243,11 @@ function push_nugets(){
     done
     popd > /dev/null
 }
+
+function curdir(){
+    if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
+        pwd -W
+    else
+        pwd
+    fi    
+}

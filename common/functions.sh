@@ -38,7 +38,12 @@ function print(){
 }
 
 function print_line(){
-    print "$1" "$2"
+    MSG=$1
+    COLOR=${GRAY}
+    if [[ !(-z ${2+x}) ]]; then
+        COLOR=${2}
+    fi
+    print "${MSG}" "${COLOR}"
     printf "\r\n"
 }
 
@@ -110,13 +115,14 @@ function initialize_defaults() {
 }
 
 function export_bam_overrides() {
-    print_line "BAMOVERRIDES $BAMOVERRIDES" $YELLOW
+    BAMOVERRIDES=${BAMOVERRIDES}
+    print_line "BAMOVERRIDES ${BAMOVERRIDES}" ${YELLOW}
     if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
         print_line "EXPORTING BAMOVERRIDES ${BAMOVERRIDES}" ${DARKYELLOW}
         export_var_dir ${BAMOVERRIDES}
     else
-        print_line "CURRENT DIRECTORY is `pwd`"
-        print_line "BAMOVERRIDES is "$BAMOVERRIDES""
+        print_line "CURRENT DIRECTORY is `pwd`" ${CYAN}
+        print_line "BAMOVERRIDES is not set or not found: ("${BAMOVERRIDES}")" ${CYAN}
     fi
 }
 

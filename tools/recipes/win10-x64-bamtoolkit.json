@@ -1,6 +1,6 @@
 {
   "Name": "win10-x64-bamtoolkit",
-  "ProjectRoot": "../../.././_tools/",
+  "ProjectRoot": "C:/src/repos/BamFrameworkCore/Bam.Net/_tools/",
   "ProjectFilePaths": [
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bake\\bake.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamapi\\bamapi.csproj",

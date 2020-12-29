@@ -148,8 +148,6 @@ function ensure_bake(){
     if [[ -z ${BAKE} || !(-f ${BAKE}) ]]; then
         if [[ -f ${BAMSRCROOT}/_tools/bake/bake.csproj ]]; then
             build_tool bake
-        elif [[ -z ${BAM} || !(-f ${BAM}) ]]; then
-            $BAM /install:bake
         elif [[ -f ${BAMSRCROOT}/_tools/bam/bam.csproj ]]; then
             build_tool bam
             $BAM /install:bake

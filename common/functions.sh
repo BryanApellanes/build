@@ -207,13 +207,13 @@ function clean_artifacts(){
 }
 
 function set_git_commit(){
-    cd ${BAMSRCROOT}
+    pushd ${BAMSRCROOT} > /dev/null
     if [[ -z ${GITCOMMIT} ]]; then
-        printf "Setting GITCOMMIT from `pwd`\r\n"
+        print_line "Setting GITCOMMIT from `pwd`" ${DARKGREEN}
         export GITCOMMIT=`git rev-parse --short HEAD`
     fi
-    printf "GITCOMMIT = ${GITCOMMIT}\r\n"
-    cd -
+    print_line "GITCOMMIT = ${GITCOMMIT}" ${GREEN}
+    popd > /dev/null
 }
 
 function push_nugets(){

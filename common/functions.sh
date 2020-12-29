@@ -201,10 +201,10 @@ function add_symlinks_to_path(){
 
 function clean_artifacts(){
     if [[ -d ${BAMARTIFACTS} ]]; then
-        printf "cleaning artifacts: ${BAMARTIFACTS}"
-        pushd ${BAMARTIFACTS}
+        print_line "cleaning artifacts: ${BAMARTIFACTS}" ${DARKYELLOW}
+        pushd ${BAMARTIFACTS} > /dev/null
         rm * -fr
-        popd
+        popd > /dev/null
     fi
 }
 

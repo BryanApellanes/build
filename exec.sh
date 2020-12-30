@@ -3,9 +3,9 @@
 export CONTEXT=$1
 export COMMAND=$2
 
-pushd ./common
+pushd ./common > /dev/null
 source ./init.sh
-popd
+popd > /dev/null
 
 cd ${CONTEXT}
 if [[ !(-f ./commands/${COMMAND}.sh) ]]; then

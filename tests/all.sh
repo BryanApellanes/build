@@ -1,10 +1,14 @@
 #!/bin/bash
 
 
-source ./configure.sh
-./clean.sh
-./build.sh
+function build(){
+    source ./configure.sh
+    ./clean.sh
+    ./build.sh
+}
 
-cd ./run
-./run.sh $1 $2 $3
-cd ..
+function run_recipe(){
+    pushd ./run > /dev/null
+    ./run-recipe.sh $1 $2 $3
+    popd > /dev/null
+}

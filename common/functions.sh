@@ -97,7 +97,7 @@ function unset_var_dir(){
 }
 
 function set_runtime(){
-    if [[ -z "${RUNTIME}" ]]; then 
+    if [[ -z "${RUNTIME+x}" ]]; then 
         if [[ "${OSTYPE}" == "linux-gnu" ]]
             then RUNTIME=ubuntu.16.10-x64
         fi
@@ -119,8 +119,33 @@ function set_runtime(){
     fi
 }
 
+function set_git_vars(){
+      if [[ -z ${CI_USERNAME+x} ]]; then
+        CI_USERNAME="ci"
+      fi
+      if [[ -z ${CI_EMAIL+x} ]]; then
+        CI_EMAIL="ci@threeheadz.com"
+      fi
+      if [[ -z ${COMMIT_TO_BRANCH+x} ]]; then
+        COMMIT_TO_BRANCH="bam-net-core-test"
+      fi
+      if [[ -z ${GIT_COMMIT_MESSAGE+x} ]]; then
+        GIT_COMMIT_MESSAGE="committed by github action (bam-net-core-dev)"
+      fi
+      if [[ -z ${GIT_COMMIT_AUTHOR+x} ]]; then
+        GIT_COMMIT_AUTHOR="ci <ci@threeheadz.com>"
+      fi
+      if [[ -z ${GIT_ADD_FILE_PATTERN+x} ]]; then
+        GIT_ADD_FILE_PATTERN="."
+      fi
+      if [[ -z ${GIT_COMMIT_OPTIONS+x} ]]; then
+        GIT_COMMIT_OPTIONS=""
+      fi        
+}
+
 function initialize_defaults() {
-    if [[ !(-z ${BAM_DEFAULTS_SET}) ]]; then
+    set_git_vars
+    if [[ !(-z ${BAM_DEFAULTS_SET+x}) ]]; then
         return
     fi
     export BAM_DEFAULTS_SET=true

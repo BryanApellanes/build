@@ -32,7 +32,9 @@ if [[ !(-f ../${CONTEXT}/${COMMAND}.sh) ]]; then
     exit 1
 fi
 
-printf "executing => ${CONTEXT}/${COMMAND}.sh $3 $4 $5 $6\r\n"
+printf "****************\r\n"
+printf "Executing => ${CONTEXT}/${COMMAND}.sh $3 $4 $5 $6\r\n"
+printf "****************\r\n"
 pushd ../${CONTEXT} > /dev/null
 ./${COMMAND}.sh $3 $4 $5 $6
 popd > /dev/null

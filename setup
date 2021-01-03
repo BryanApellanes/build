@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ $_ != $0 ]]; then # && echo "Script is being sourced" || echo "Script is a subshell"
-    pushd ./common
+    pushd ./common > /dev/null
     source init.sh
-    popd
+    popd > /dev/null
     
     export BAMSRCROOT=`pwd`
     

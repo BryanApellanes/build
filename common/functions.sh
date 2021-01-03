@@ -81,6 +81,21 @@ function export_var_dir(){
     popd > /dev/null
 }
 
+function unset_var_dir(){
+    DIRECTORY=$1
+
+    pushd $DIRECTORY > /dev/null
+    print_line "**** ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
+    for FILE in ./* 
+    do
+        CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
+        export $CURRENTVARIABLE=
+        print_line "${CURRENTVARIABLE}=" ${DARKYELLOW}
+    done
+    print_line "**** / ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
+    popd > /dev/null    
+}
+
 function set_runtime(){
     if [[ -z "${RUNTIME}" ]]; then 
         if [[ "${OSTYPE}" == "linux-gnu" ]]
@@ -105,7 +120,18 @@ function set_runtime(){
 }
 
 function initialize_defaults() {
+    if [[ !(-z ${BAM_DEFAULTS_SET}) ]]; then
+        return
+    fi
+    export BAM_DEFAULTS_SET=true
+    if [[ -d ./.bam/build/common ]]; then
+        pushd ./.bam/build/common > /dev/null
+        unset_var_dir ./env/defaults
+        export_var_dir ./env/defaults
+        popd 
+    fi
     if [[ -d ./env/defaults ]]; then
+        unset_var_dir ./env/defaults
         export_var_dir ./env/defaults
     fi
     print_line ""
@@ -124,6 +150,28 @@ function export_bam_overrides() {
         print_line "CURRENT DIRECTORY is `pwd`" ${CYAN}
         print_line "BAMOVERRIDES is not set or not found: ("${BAMOVERRIDES}")" ${CYAN}
     fi
+}
+
+function initialize(){
+    SRCTEMP=$1
+    if [[ -z ${SRCTEMP} ]]; then
+        SRCTEMP=${BAMSRCROOT}
+    fi
+    if [[ -z ${SRCTEMP} ]]; then
+        SRCTEMP=`curdir`
+    fi
+    if [[ -z ${SRCTEMP} ]]; then
+        print_line "Unable to determine value for BAMSRCROOT"
+        exit 1
+    fi
+    pushd ${SRCTEMP} > /dev/null
+    echo ${SRCTEMP} > "./.bam/build/overrides/BAMSRCROOT"
+    popd > /dev/null
+    export BAMOVERRIDES="${SRCTEMP}/.bam/build/overrides"
+    initialize_defaults
+    export_bam_overrides
+    expand_tildes
+    set_git_commit
 }
 
 function build_tool(){

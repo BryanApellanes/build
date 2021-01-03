@@ -1,6 +1,6 @@
 {
   "Name": "win10-x64-bamfx-lib",
-  "ProjectRoot": "../../.././_lib/",
+  "ProjectRoot": "C:/src/repos/BamFrameworkCore/Bam.Net/_lib/",
   "ProjectFilePaths": [
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\adhoc\\adhoc.csproj",
     "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_lib\\bam.net.aws\\bam.net.aws.csproj",

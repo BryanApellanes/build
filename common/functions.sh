@@ -212,7 +212,6 @@ function set_git_commit(){
         print_line "Setting GITCOMMIT from `pwd`" ${DARKGREEN}
         export GITCOMMIT=`git rev-parse --short HEAD`
     fi
-    echo ${GITCOMMIT} > `pwd`'/.bam/build/overrides/GITCOMMIT'
     print_line "GITCOMMIT = ${GITCOMMIT}" ${GREEN}
     popd > /dev/null
 }

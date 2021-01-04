@@ -281,7 +281,7 @@ function clean_artifacts(){
 
 function set_git_commit(){
     pushd ${BAMSRCROOT} > /dev/null
-    if [[ -z ${GITCOMMIT} ]]; then
+    if [[ -z ${GITCOMMIT+x} ]]; then
         print_line "Setting GITCOMMIT from `pwd`" ${DARKGREEN}
         export GITCOMMIT=`git rev-parse --short HEAD`
     fi

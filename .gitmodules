@@ -4,3 +4,6 @@
 [submodule "npm/BamAppTemplate"]
 	path = npm/BamAppTemplate
 	url = git@github.com:BryanApellanes/BamApp.git
+[submodule "npm/bam-job"]
+	path = npm/bam-job
+	url = git@github.com:BryanApellanes/bam-job.git

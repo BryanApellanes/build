@@ -10,3 +10,6 @@
 [submodule "npm/BamAppTemplate"]
 	path = npm/BamAppTemplate
 	url = git@github.com:BryanApellanes/BamAppTemplate.git
+[submodule "npm/bam-cli-args"]
+	path = npm/bam-cli-args
+	url = git@github.com:BryanApellanes/bam-cli-args.git

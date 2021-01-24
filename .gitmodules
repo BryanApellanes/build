@@ -13,3 +13,6 @@
 [submodule "npm/bam-cli-args"]
 	path = npm/bam-cli-args
 	url = git@github.com:BryanApellanes/bam-cli-args.git
+[submodule "npm/bam-inputs"]
+	path = npm/bam-inputs
+	url = git@github.com:BryanApellanes/bam-inputs.git

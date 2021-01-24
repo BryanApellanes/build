@@ -10,6 +10,3 @@
 [submodule "npm/BamAppTemplate"]
 	path = npm/BamAppTemplate
 	url = git@github.com:BryanApellanes/BamAppTemplate.git
-[submodule "npm/bam-inputs"]
-	path = npm/bam-inputs
-	url = git@github.com:BryanApellanes/bam-inputs.git

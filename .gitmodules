@@ -16,3 +16,6 @@
 [submodule "npm/bam-inputs"]
 	path = npm/bam-inputs
 	url = git@github.com:BryanApellanes/bam-inputs.git
+[submodule "npm/bam-action"]
+	path = npm/bam-action
+	url = git@github.com:BryanApellanes/bam-action.git

@@ -1,6 +1,3 @@
-[submodule "npm/bam_js"]
-	path = npm/bam_js
-	url = git@github.com:BryanApellanes/bam.js.git
 [submodule "npm/bam-artifact"]
 	path = npm/bam-artifact
 	url = git@github.com:BryanApellanes/bam-artifact.git

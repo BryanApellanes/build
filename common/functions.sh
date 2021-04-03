@@ -223,6 +223,7 @@ function ensure_bake(){
             build_tool bake
         elif [[ -f ${BAMSRCROOT}/_tools/bam/bam.csproj ]]; then
             build_tool bam
+            echo ${BAM} /install:bake
             $BAM /install:bake
         else
             print_line "UNABLE TO INSTALL BUILD TOOLS" $RED

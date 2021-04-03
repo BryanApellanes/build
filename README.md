@@ -1,4 +1,12 @@
 # Build
+
+## TL;DR
+Run the following commands in sequence to use build scripts as intended.
+
+```bash
+./configure
+```
+
 .bam/build is a collection of scripts used to build bam based projects. Lifecycle scripts represent development lifecycle activities that facilitate development.  
 
 Builds are managed by links to lifecycle scripts found in .bam/build/lifecycle. To ensure proper behavior, these scripts must be executed from the .bam/build directory using the symlinks found there.

@@ -9,6 +9,13 @@ Configures the specified context; see -? for a specific context for additional h
 ## Build
 Builds the specified context; see -? for a specific context for additional help.
 
+### Environment Variables
+The following are environment variables that affect the build process.
+
+- BAMSRCROOT &mdash; the full or relative path to the root of the `Bam.Net.Core` repository
+- BAMDEBUG &mdash; if the value is `true` the build process will pause to allow you to attach a debugger to the relevant process ID.
+
+
 ## Debug
 Debugs the specified context; see -? for a specific context for additional help.
 

@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# argument if supplied is treated as BAMSRCROOT
+
 pushd ../common > /dev/null
-source ./init.sh
+source ./init.sh $1
 popd > /dev/null
 
 ensure_bake

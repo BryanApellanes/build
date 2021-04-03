@@ -226,6 +226,7 @@ function ensure_bake(){
             $BAM /install:bake
         else
             print_line "UNABLE TO INSTALL BUILD TOOLS" $RED
+            exit 1
         fi
     fi
 }

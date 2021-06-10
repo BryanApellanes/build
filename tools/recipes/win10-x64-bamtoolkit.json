@@ -1,18 +1,20 @@
 {
   "Name": "win10-x64-bamtoolkit",
-  "ProjectRoot": "../../.././_tools/",
+  "ProjectRoot": "D:/repos/BamFrameworkCore/Bam.Net/_tools/",
   "ProjectFilePaths": [
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bake\\bake.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamapi\\bamapi.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamd\\bamd.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamtest\\bamtest.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamweb\\bamweb.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\breve\\breve.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\laotze\\laotze.csproj",
-    "C:\\src\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\masuco\\masuco.csproj"
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bake\\bake.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bam\\bam.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamapi\\bamapi.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamd\\bamd.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamdb\\bamdb.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamtest\\bamtest.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bamweb\\bamweb.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\breve\\breve.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\laotze\\laotze.csproj",
+    "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\masuco\\masuco.csproj"
   ],
   "OutputDirectory": "c:/tmp/bam/bin",
-  "NugetOutputDirectory": "C:\\Users\\bryan\\.bam\\nupkg\\Windows",
+  "NugetOutputDirectory": "C:\\Users\\bryan.apellanes.G19H2Z2\\.bam\\nupkg\\Windows",
   "BuildConfig": "Debug",
   "OsName": "Windows"
 }

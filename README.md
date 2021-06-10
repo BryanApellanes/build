@@ -24,5 +24,10 @@ Builds the specified context; see -? for a specific context for additional help.
 The following are environment variables that affect the build process.
 
 - BAMSRCROOT &mdash; typically, the full or relative path to the root of the `Bam.Net.Core` repository.  This value may refer to the root of any repository designed to be built by this build system.
-- BAMDEBUG &mdash; if the value is `true` the build process will pause to allow you to attach a debugger to the relevant process ID of the `bake` process.
+- BAMDEBUG &mdash; if the value is `true` the build process pauses to allow you to attach a debugger to the process ID of the `bake` process.
+- BAMLIFECYCLE &mdash; affects how package versions are updated:
+    - `dev` &mdash; Include the commit as build number, example: 1.0.0-{commit}
+    - `test` &mdash; Include '-test' as the build number, example: 1.0.0-test
+    - `staging` &mdash; Include '-rc+{commit}' as the build number, example: 1.0.0-rc+{commit}
+    - `release` &mdash; Remove build and prerelease
 

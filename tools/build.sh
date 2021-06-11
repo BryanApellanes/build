@@ -15,6 +15,6 @@ echo "BAKING recipe ./recipes/${RUNTIME}-bamtoolkit.json into ${OUTPUTBIN}"
 ${BAKE} /recipe:./recipes/${RUNTIME}-bamtoolkit.json /output:${OUTPUTBIN}
 
 echo "BAKING nugets ./recipes/${RUNTIME}-bamtoolkit.json into ${BAMARTIFACTS}/nugetPackages"
-${BAKE} /nuget:./recipes/${RUNTIME}-bamtoolkit.json /nugetOutput:${BAMARTIFACTS}/nugetPackages
+${BAKE} /nuget:./recipes/${RUNTIME}-bamtoolkit.json /nugetOutput:${BAMHOME}/nugetPackages
 
 ./commands/zip.sh

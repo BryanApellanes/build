@@ -5,6 +5,8 @@ Run the following commands in sequence to use build scripts as intended.
 
 ```bash
 ./configure
+./clean
+./build
 ```
 
 .bam/build is a collection of scripts used to build bam based projects. Lifecycle scripts represent development lifecycle activities that facilitate development.  

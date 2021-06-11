@@ -1,6 +1,6 @@
 {
   "Name": "win10-x64-bamtoolkit",
-  "ProjectRoot": "../../.././_tools/",
+  "ProjectRoot": "D:/repos/BamFrameworkCore/Bam.Net/_tools/",
   "ProjectFilePaths": [
     "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bake\\bake.csproj",
     "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\bam\\bam.csproj",
@@ -13,7 +13,7 @@
     "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\laotze\\laotze.csproj",
     "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tools\\masuco\\masuco.csproj"
   ],
-  "OutputDirectory": "c:/tmp/bam/bin",
+  "OutputDirectory": "c:/opt/bam/output/bin",
   "NugetOutputDirectory": "C:\\Users\\bryan.apellanes.G19H2Z2\\.bam\\nupkg\\Windows",
   "BuildConfig": "Debug",
   "OsName": "Windows"

@@ -50,6 +50,8 @@ function print_line(){
 function export_windows_overrides(){    
     if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
         print_line "*** WINDOWS OVERRIDES ***" ${BLUE}
+        print_line "setting BAMHOME=${BAMHOMEWINDOWS}" ${BLUE}
+        export BAMHOME=${BAMHOMEWINDOWS}
         print_line "setting BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}" ${BLUE}
         export BAMTOOLKITHOME=${BAMTOOLKITHOMEWINDOWS}
         print_line "setting BAMARTIFACTS=${BAMARTIFACTSWINDOWS}" ${BLUE}

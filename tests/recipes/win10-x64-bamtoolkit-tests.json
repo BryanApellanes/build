@@ -1,6 +1,6 @@
 {
   "Name": "win10-x64-bamtoolkit-tests",
-  "ProjectRoot": "D:/repos/BamFrameworkCore/Bam.Net/_tests/core/",
+  "ProjectRoot": "../../.././_tests/core/",
   "ProjectFilePaths": [
     "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tests\\core\\bam.net.analytics.core.tests\\bam.net.analytics.core.tests.csproj",
     "D:\\repos\\BamFrameworkCore\\Bam.Net\\_tests\\core\\bam.net.automation.core.tests\\bam.net.automation.core.tests.csproj",

@@ -7,6 +7,6 @@ popd > /dev/null
 ensure_bake
 
 ${BAKE} /recipe:./recipes/${RUNTIME}-bamfx-lib.json
-${BAKE} /nuget:./recipes/${RUNTIME}-bamfx-lib.json /nugetOutput:${BAMARTIFACTS}/nugetPackages
+${BAKE} /nuget:./recipes/${RUNTIME}-bamfx-lib.json /nugetOutput:${BAMHOME}/nugetPackages
 
 push_nugets

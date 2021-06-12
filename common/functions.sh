@@ -47,7 +47,13 @@ function print_line(){
     printf "\r\n"
 }
 
-function export_windows_overrides(){    
+function export_windows_overrides(){ 
+    if [[ !(-z ${BAM_WINDOWS_DEFAULTS_SET+x}) ]]; then
+        print_line "windows defaults already set" ${YELLOW}
+        return
+    fi
+    export BAM_WINDOWS_DEFAULTS_SET=true
+    print_line "exporting windows overrides" ${CYAN}   
     if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
         print_line "*** WINDOWS OVERRIDES ***" ${BLUE}
         print_line "setting BAMHOME=${BAMHOMEWINDOWS}" ${BLUE}
@@ -64,8 +70,27 @@ function export_windows_overrides(){
         export OUTPUTLIB=${OUTPUTLIBWINDOWS}
         print_line "setting TESTBIN=${TESTBINWINDOWS}" ${BLUE}
         export TESTBIN=${TESTBINWINDOWS}
+        
+        print_line "checking for `pwd`/env/windows_overrides" ${CYAN}        
+        if [[ -d ./env/windows_overrides ]]; then
+            unset_var_dir ./env/windows_overrides
+            export_var_dir ./env/windwows_overrides
+        else
+            print_line "`pwd`/env/windows_overrides doesn't exist"
+        fi
+
+        print_line "checking for ${BAMHOME}/env/windows_overrides" ${DARKCYAN}
+        if [[ -d ${BAMHOME}/env/windows_overrides ]]; then
+            unset_var_dir ${BAMHOME}/env/windows_overrides
+            export_var_dir ${BAMHOME}/env/windows_overrides
+        else
+            print_line "${BAMHOME}/env/windows_overrides doesn't exist"
+        fi
+
         print_line "*** / WINDOWS OVERRIDES ***" ${BLUE}
+        return
     fi
+    print_line "not windows" ${YELLOW}
 }
 
 function export_var_dir(){
@@ -145,9 +170,39 @@ function set_git_vars(){
       fi        
 }
 
-function initialize_defaults() {
+function export_overrides() {
+    BAMOVERRIDES=${BAMOVERRIDES}
+    print_line "BAMOVERRIDES ${BAMOVERRIDES}" ${YELLOW}
+    if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
+        print_line "EXPORTING BAMOVERRIDES ${BAMOVERRIDES}" ${DARKYELLOW}
+        unset_var_dir ${BAMOVERRIDES}
+        export_var_dir ${BAMOVERRIDES}
+    else
+        print_line "CURRENT DIRECTORY is `pwd`" ${CYAN}
+        print_line "BAMOVERRIDES is not set or not found: ("${BAMOVERRIDES}")" ${CYAN}
+    fi
+    if [[ -d ./.bam/env/overrides ]]; then
+        print_line "EXPORTING OVERRIDES DIRECTORY `pwd`/.bam/env/overrides" ${DARKYELLOW}
+        unset_var_dir ./.bam/env/overrides
+        export_var_dir ./.bam/env/overrides
+    else 
+        print_line "`pwd`/.bam/env/overrides doesn't exist"   
+    fi
+
+    print_line "checking for ${BAMHOME}/env/overrides" ${CYAN}
+    if [[ -d ${BAMHOME}/env/overrides ]]; then
+        unset_var_dir ${BAMHOME}/env/overrides
+        export_var_dir ${BAMHOME}/env/overrides
+    else 
+        print_line "${BAMHOME}/env/overrides doesn't exist"
+    fi
+}
+
+function initialize_variables() {
+    print_line "initializing defaults" ${CYAN}
     set_git_vars
     if [[ !(-z ${BAM_DEFAULTS_SET+x}) ]]; then
+        print_line "defaults already set" ${YELLOW}
         return
     fi
     export BAM_DEFAULTS_SET=true
@@ -161,25 +216,17 @@ function initialize_defaults() {
         unset_var_dir ./env/defaults
         export_var_dir ./env/defaults
     fi
-    print_line ""
+    print_line "*** functions.sh.initialize_variables()" ${CYAN}
+    print_line "export_overrides()" ${CYAN}
+    export_overrides
+    print_line "export_windows_overrides()" ${CYAN}
     export_windows_overrides
     print_line ""
     set_runtime
 }
 
-function export_bam_overrides() {
-    BAMOVERRIDES=${BAMOVERRIDES}
-    print_line "BAMOVERRIDES ${BAMOVERRIDES}" ${YELLOW}
-    if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
-        print_line "EXPORTING BAMOVERRIDES ${BAMOVERRIDES}" ${DARKYELLOW}
-        export_var_dir ${BAMOVERRIDES}
-    else
-        print_line "CURRENT DIRECTORY is `pwd`" ${CYAN}
-        print_line "BAMOVERRIDES is not set or not found: ("${BAMOVERRIDES}")" ${CYAN}
-    fi
-}
-
 function initialize(){
+    print_line "*** executing functions.sh_initialize() ***" ${CYAN}
     SRCTEMP=$1
     if [[ -z ${SRCTEMP} ]]; then
         SRCTEMP=${BAMSRCROOT}
@@ -191,12 +238,13 @@ function initialize(){
         print_line "Unable to determine value for BAMSRCROOT"
         exit 1
     fi
+    print_line "SRCTEMP = ${SRCTEMP}"
     pushd ${SRCTEMP} > /dev/null
-    echo ${SRCTEMP} > "./.bam/build/overrides/BAMSRCROOT"
+    mkdir -p ${SRCTEMP}/.bam/build/overrides
+    echo ${SRCTEMP} > "${SRCTEMP}/.bam/build/overrides/BAMSRCROOT" # write the path for other scripts to see during this run
     popd > /dev/null
     export BAMOVERRIDES="${SRCTEMP}/.bam/build/overrides"
-    initialize_defaults
-    export_bam_overrides
+    initialize_variables
     expand_tildes
     set_git_commit
 }
@@ -227,7 +275,7 @@ function ensure_bake(){
             build_tool bam
             $BAM /install:bake
         else
-            print_line "UNABLE TO INSTALL BUILD TOOLS" $RED
+            print_line "UNABLE TO INSTALL BUILD TOOLS, ${BAMSRCROOT}/_tools/bake/bake.csproj NOT FOUND" $RED
             exit 1
         fi
     fi

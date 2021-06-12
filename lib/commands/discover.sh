@@ -6,5 +6,5 @@ popd
 
 ensure_bake
 
-echo ${BAKE} /discover:${BAMSRCROOT}/_lib/ /output:${OUTPUTLIB} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamfx-lib.json
-${BAKE} /discover:${BAMSRCROOT}/_lib/ /output:${OUTPUTLIB} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamfx-lib.json
+echo ${BAKE} /discover:${BAMSRCROOT}/_lib/ /recipeOutputDirectory:${OUTPUTLIB} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamfx-lib.json
+${BAKE} /discover:${BAMSRCROOT}/_lib/ /recipeOutputDirectory:${OUTPUTLIB} /outputRecipe:${OUTPUTRECIPES}${RUNTIME}-bamfx-lib.json

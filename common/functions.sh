@@ -84,7 +84,7 @@ function export_windows_overrides(){
             unset_var_dir ${BAMHOME}/env/windows_overrides
             export_var_dir ${BAMHOME}/env/windows_overrides
         else
-            print_line "${BAMHOME}/env/windows_overrides doesn't exist"
+            print_line "${BAMHOME}/env/windows_overrides doesn't exist" ${DARKYELLOW}
         fi
 
         print_line "*** / WINDOWS OVERRIDES ***" ${BLUE}
@@ -186,7 +186,7 @@ function export_overrides() {
         unset_var_dir ./.bam/env/overrides
         export_var_dir ./.bam/env/overrides
     else 
-        print_line "`pwd`/.bam/env/overrides doesn't exist"   
+        print_line "`pwd`/.bam/env/overrides doesn't exist" ${DARKYELLOW}  
     fi
 
     print_line "checking for ${BAMHOME}/env/overrides" ${CYAN}

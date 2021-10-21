@@ -96,6 +96,14 @@ function export_windows_overrides(){
 function export_var_dir(){
     DIRECTORY=$1
 
+    if [[ -z "$DIRECTORY" ]]; then
+        return
+    fi
+
+    if [[ ! -d "$DIRECTORY" ]]; then
+        return
+    fi
+
     pushd $DIRECTORY > /dev/null
     print_line "**** ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
     for FILE in ./* 
@@ -110,6 +118,14 @@ function export_var_dir(){
 
 function unset_var_dir(){
     DIRECTORY=$1
+
+    if [[ -z "$DIRECTORY" ]]; then
+        return
+    fi
+
+    if [[ ! -d "$DIRECTORY" ]]; then
+        return
+    fi
 
     pushd $DIRECTORY > /dev/null
     print_line "**** ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}

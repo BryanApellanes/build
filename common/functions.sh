@@ -81,6 +81,7 @@ function export_windows_overrides(){
 }
 
 function export_var_dir(){
+    STARTDIR=`pwd`
     DIRECTORY=$1
 
     if [[ -z "$DIRECTORY" ]]; then
@@ -91,7 +92,7 @@ function export_var_dir(){
         return
     fi
 
-    pushd $DIRECTORY > /dev/null
+    cd ${DIRECTORY}
     print_line "**** EXPORTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
     for FILE in ./* 
     do
@@ -100,10 +101,11 @@ function export_var_dir(){
         print_line "${CURRENTVARIABLE}=$(<./${FILE})" ${DARKCYAN}
     done
     print_line "**** / EXPORTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
-    popd > /dev/null
+    cd ${STARTDIR}
 }
 
 function unset_var_dir(){
+    STARTDIR=`pwd`
     DIRECTORY=$1
 
     if [[ -z "$DIRECTORY" ]]; then
@@ -114,7 +116,7 @@ function unset_var_dir(){
         return
     fi
 
-    pushd $DIRECTORY > /dev/null
+    cd ${DIRECTORY}
     print_line "**** UNSETTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
     for FILE in ./* 
     do
@@ -123,7 +125,7 @@ function unset_var_dir(){
         print_line "${CURRENTVARIABLE}=" ${DARKYELLOW}
     done
     print_line "**** / UNSETTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
-    popd > /dev/null    
+    cd ${STARTDIR}
 }
 
 function set_runtime(){
@@ -173,49 +175,35 @@ function set_git_vars(){
       fi        
 }
 
-function export_overrides() {
-    BAMOVERRIDES=${BAMOVERRIDES}
-    print_line "BAMOVERRIDES ${BAMOVERRIDES}" ${YELLOW}
-    if [[ !(-z ${BAMOVERRIDES}) && -d ${BAMOVERRIDES} ]]; then
-        print_line "EXPORTING BAMOVERRIDES ${BAMOVERRIDES}" ${DARKYELLOW}
-        unset_var_dir ${BAMOVERRIDES}
-        export_var_dir ${BAMOVERRIDES}
-    else
-        print_line "CURRENT DIRECTORY is `pwd`" ${CYAN}
-        print_line "BAMOVERRIDES is not set or not found: ("${BAMOVERRIDES}")" ${CYAN}
-    fi
-
-    print_line "checking for ${BAMHOME}/env/overrides" ${CYAN}
-    if [[ -d ${BAMHOME}/env/overrides ]]; then
-        unset_var_dir ${BAMHOME}/env/overrides
-        export_var_dir ${BAMHOME}/env/overrides
-    else 
-        print_line "${BAMHOME}/env/overrides doesn't exist"
-    fi
-}
-
 function initialize_variables() {
-    STARTDIR=`pwd`
     print_line "*** functions.sh.initialize_variables()" ${CYAN}
+    STARTDIR=`pwd`
+    BAM_ENV=$1
+    if [[ -z ${BAM_ENV} ]]; then
+        BAM_ENV="defaults"
+    fi
     set_git_vars
     SCRIPTDIR=${BAMSRCROOT}/.bam/build/common
-    unset_var_dir ${SCRIPTDIR}/env/defaults
-    export_var_dir ${SCRIPTDIR}/env/defaults
+    unset_var_dir ${SCRIPTDIR}/env/${BAM_ENV}
+    export_var_dir ${SCRIPTDIR}/env/${BAM_ENV}
     
     print_line "*** / functions.sh.initialize_variables()" ${CYAN}
-    print_line "*** functions.sh.export_overrides()" ${BLUE}
-    export_overrides
-    print_line "export_windows_overrides()" ${DARKBLUE}
+    
     export_windows_overrides
-    print_line ""
+    
     set_runtime
+
     cd ${STARTDIR}
 }
 
 function initialize(){
     print_line "*** executing functions.sh_initialize() ***" ${CYAN}
+    STARTDIR=`curdir`
+    if [[ -z ${BAM_ENV} ]]; then
+        BAM_ENV="defaults"
+    fi
     SRCTEMP=$1
-    if [[ -z ${SRCTEMP} ]]; then
+    if [[ -z ${SRCTEMP} ]] && [[ !(-z ${BAMSRCROOT}) ]]; then
         SRCTEMP=${BAMSRCROOT}
     fi
     if [[ -z ${SRCTEMP} ]]; then
@@ -225,15 +213,13 @@ function initialize(){
         print_line "Unable to determine value for BAMSRCROOT"
         exit 1
     fi
-    print_line "SRCTEMP = ${SRCTEMP}"
-    pushd ${SRCTEMP} > /dev/null
-    mkdir -p ${SRCTEMP}/.bam/build/overrides
-    echo ${SRCTEMP} > "${SRCTEMP}/.bam/build/overrides/BAMSRCROOT" # write the path for other scripts to see during this run
-    popd > /dev/null
-    export BAMOVERRIDES="${SRCTEMP}/.bam/build/overrides"
-    initialize_variables
+    print_line "SRCTEMP = ${SRCTEMP}" ${DARKGREEN}
+    print_line "BAM_ENV = ${BAM_ENV}" ${GREEN}
+    cd ${SRCTEMP} 
+    initialize_variables ${BAM_ENV}
     expand_tildes
     set_git_commit
+    cd ${STARTDIR}
 }
 
 function build_tool(){
@@ -318,7 +304,8 @@ function clean_artifacts(){
 }
 
 function set_git_commit(){
-    pushd ${BAMSRCROOT} > /dev/null
+    STARTDIR=`pwd`
+    cd ${BAMSRCROOT} 
     if [[ -z ${GITCOMMIT+x} ]]; then
         print_line "Setting GITCOMMIT from `pwd`" ${DARKGREEN}
         export GITCOMMIT=`git rev-parse --short HEAD`
@@ -328,7 +315,7 @@ function set_git_commit(){
     fi
     print_line "GITCOMMIT = ${GITCOMMIT}" ${GREEN}
 
-    popd > /dev/null
+    cd ${STARTDIR}
 }
 
 function push_nugets(){

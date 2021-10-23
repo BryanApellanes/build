@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# $1 = BAMSRCROOT value
+BAMSRCROOT=$1
 
 source ./functions.sh
 source ./git-functions.sh
 
-initialize $1
+initialize ${BAMSRCROOT}
 
 mkdir -p ${BAMTOOLKITHOME}
 mkdir -p ${BAMARTIFACTS}

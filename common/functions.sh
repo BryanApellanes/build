@@ -48,11 +48,6 @@ function print_line(){
 }
 
 function export_windows_overrides(){ 
-    if [[ !(-z ${BAM_WINDOWS_DEFAULTS_SET+x}) ]]; then
-        print_line "windows defaults already set" ${YELLOW}
-        return
-    fi
-    export BAM_WINDOWS_DEFAULTS_SET=true
     print_line "exporting windows overrides" ${CYAN}   
     if [[ "${OSTYPE}" == "cygwin" || "${OSTYPE}" == "msys" ]]; then
         print_line "*** WINDOWS OVERRIDES ***" ${BLUE}
@@ -70,14 +65,6 @@ function export_windows_overrides(){
         export OUTPUTLIB=${OUTPUTLIBWINDOWS}
         print_line "setting TESTBIN=${TESTBINWINDOWS}" ${BLUE}
         export TESTBIN=${TESTBINWINDOWS}
-        
-        print_line "checking for `pwd`/env/windows_overrides" ${CYAN}        
-        if [[ -d ./env/windows_overrides ]]; then
-            unset_var_dir ./env/windows_overrides
-            export_var_dir ./env/windwows_overrides
-        else
-            print_line "`pwd`/env/windows_overrides doesn't exist"
-        fi
 
         print_line "checking for ${BAMHOME}/env/windows_overrides" ${DARKCYAN}
         if [[ -d ${BAMHOME}/env/windows_overrides ]]; then
@@ -105,14 +92,14 @@ function export_var_dir(){
     fi
 
     pushd $DIRECTORY > /dev/null
-    print_line "**** ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
+    print_line "**** EXPORTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
     for FILE in ./* 
     do
         CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
         export $CURRENTVARIABLE=$(<./${FILE})    
         print_line "${CURRENTVARIABLE}=$(<./${FILE})" ${DARKCYAN}
     done
-    print_line "**** / ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
+    print_line "**** / EXPORTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${CYAN}
     popd > /dev/null
 }
 
@@ -128,14 +115,14 @@ function unset_var_dir(){
     fi
 
     pushd $DIRECTORY > /dev/null
-    print_line "**** ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
+    print_line "**** UNSETTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
     for FILE in ./* 
     do
         CURRENTVARIABLE=`echo ${FILE} | sed 's#./##'`  
         export $CURRENTVARIABLE=
         print_line "${CURRENTVARIABLE}=" ${DARKYELLOW}
     done
-    print_line "**** / ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
+    print_line "**** / UNSETTING ENVIRONMENT VARIABLES: VARDIR = '${DIRECTORY}' ****" ${DARKYELLOW}
     popd > /dev/null    
 }
 
@@ -197,13 +184,6 @@ function export_overrides() {
         print_line "CURRENT DIRECTORY is `pwd`" ${CYAN}
         print_line "BAMOVERRIDES is not set or not found: ("${BAMOVERRIDES}")" ${CYAN}
     fi
-    if [[ -d ./.bam/env/overrides ]]; then
-        print_line "EXPORTING OVERRIDES DIRECTORY `pwd`/.bam/env/overrides" ${DARKYELLOW}
-        unset_var_dir ./.bam/env/overrides
-        export_var_dir ./.bam/env/overrides
-    else 
-        print_line "`pwd`/.bam/env/overrides doesn't exist" ${DARKYELLOW}  
-    fi
 
     print_line "checking for ${BAMHOME}/env/overrides" ${CYAN}
     if [[ -d ${BAMHOME}/env/overrides ]]; then
@@ -215,30 +195,21 @@ function export_overrides() {
 }
 
 function initialize_variables() {
-    print_line "initializing defaults" ${CYAN}
-    set_git_vars
-    if [[ !(-z ${BAM_DEFAULTS_SET+x}) ]]; then
-        print_line "defaults already set" ${YELLOW}
-        return
-    fi
-    export BAM_DEFAULTS_SET=true
-    if [[ -d ./.bam/build/common ]]; then
-        pushd ./.bam/build/common > /dev/null
-        unset_var_dir ./env/defaults
-        export_var_dir ./env/defaults
-        popd 
-    fi
-    if [[ -d ./env/defaults ]]; then
-        unset_var_dir ./env/defaults
-        export_var_dir ./env/defaults
-    fi
+    STARTDIR=`pwd`
     print_line "*** functions.sh.initialize_variables()" ${CYAN}
-    print_line "export_overrides()" ${CYAN}
+    set_git_vars
+    SCRIPTDIR=${BAMSRCROOT}/.bam/build/common
+    unset_var_dir ${SCRIPTDIR}/env/defaults
+    export_var_dir ${SCRIPTDIR}/env/defaults
+    
+    print_line "*** / functions.sh.initialize_variables()" ${CYAN}
+    print_line "*** functions.sh.export_overrides()" ${BLUE}
     export_overrides
-    print_line "export_windows_overrides()" ${CYAN}
+    print_line "export_windows_overrides()" ${DARKBLUE}
     export_windows_overrides
     print_line ""
     set_runtime
+    cd ${STARTDIR}
 }
 
 function initialize(){

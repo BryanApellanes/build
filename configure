@@ -9,5 +9,5 @@ fi
 COMMAND="configure"
 
 pushd ./common > /dev/null
-./exec.sh ${CONTEXT} $COMMAND
+./exec.sh ${CONTEXT} $COMMAND $2
 popd > /dev/null

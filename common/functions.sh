@@ -241,6 +241,10 @@ function rebuild_bake(){
 }
 
 function ensure_bake(){
+    BAMSRCROOT=$1
+    STARTDIR=`pwd`
+    print_line "BAMSRCROOT = ${BAMSRCROOT}" ${CYAN}
+    print_line "CURDIR = `pwd`" ${YELLOW}
     if [[ -z ${BAKE} || !(-f ${BAKE}) ]]; then
         if [[ -f ${BAMSRCROOT}/_tools/bake/bake.csproj ]]; then
             build_tool bake
@@ -252,6 +256,7 @@ function ensure_bake(){
             exit 1
         fi
     fi
+    cd ${STARTDIR}
 }
 
 function ensure_bamtest(){
@@ -295,6 +300,8 @@ function add_symlinks_to_path(){
 }
 
 function clean_artifacts(){
+    STARTDIR=`pwd`
+    print_line "BAMARTIFACTS = ${BAMARTIFACTS}"
     if [[ -d ${BAMARTIFACTS} ]]; then
         print_line "cleaning artifacts: ${BAMARTIFACTS}" ${DARKYELLOW}
         pushd ${BAMARTIFACTS} > /dev/null
